@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NIF · Integrated Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   NEPAL INTERNET FOUNDATION - INTEGRATED PORTAL
+   Color Scheme: Blue (#003893), Red (#DC143C), White (#FFFFFF)
+   Inspired by Nepal's National Flag Colors
+   ═══════════════════════════════════════════════════════════════ */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* Nepal Flag Inspired Colors */
+  --nepal-blue:#003893;
+  --nepal-blue-light:#1a4d8c;
+  --nepal-blue-dark:#002060;
+  --nepal-red:#DC143C;
+  --nepal-red-dark:#B8102F;
+  --nepal-white:#FFFFFF;
+
+  /* Derived Colors */
+  --primary:var(--nepal-blue);
+  --primary-hover:var(--nepal-blue-dark);
+  --accent:var(--nepal-red);
+  --accent-hover:var(--nepal-red-dark);
+  --white:var(--nepal-white);
+
+  /* Neutral Palette */
+  --bg-light:#F8F9FC;
+  --bg-card:#FFFFFF;
+  --bg-sidebar:#002060;
+  --bg-header:#003893;
+  --text-primary:#1a1a2e;
+  --text-secondary:#4a4a6a;
+  --text-muted:#8892b0;
+  --border:#dce0ed;
+  --border-light:#e8ebf5;
+
+  /* Semantic Colors */
+  --success:#10B981;
+  --warning:#F59E0B;
+  --danger:#EF4444;
+  --info:#3B82F6;
+
+  /* Shadows */
+  --shadow:0 2px 8px rgba(0,56,147,0.08);
+  --shadow-md:0 4px 16px rgba(0,56,147,0.12);
+  --shadow-lg:0 8px 32px rgba(0,56,147,0.16);
+
+  /* Spacing */
+  --r:6px;
+  --r2:10px;
+  --r3:14px;
+}
+body{
+  font-family:'Source Sans 3',sans-serif;
+  background:var(--bg-light);
+  color:var(--text-primary);
+  min-height:100vh;
+  font-size:14px;
+  line-height:1.6;
+}
+
+/* ── HEADER ── */
+.header{
+  background:linear-gradient(135deg,var(--nepal-blue) 0%,var(--nepal-blue-dark) 100%);
+  color:var(--white);
+  padding:0 28px;
+  height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:4px solid var(--nepal-red);
+  position:sticky;top:0;z-index:300;
+  box-shadow:var(--shadow-md);
+}
+.hd-brand{display:flex;align-items:center;gap:16px}
+.hd-logo{
+  width:42px;height:42px;
+  background:var(--white);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:3px solid var(--nepal-red);
+  flex-shrink:0;
+}
+.hd-logo-text{
+  font-family:'Lora',serif;font-weight:700;font-size:16px;
+  color:var(--nepal-blue);
+}
+.hd-name{font-family:'Lora',serif;font-size:18px;font-weight:700;color:var(--white);letter-spacing:0.3px}
+.hd-sub{font-size:10px;color:rgba(255,255,255,0.7);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.hd-sep{width:1px;height:30px;background:rgba(255,255,255,0.2);margin:0 8px}
+.hd-right{display:flex;align-items:center;gap:16px}
+
+/* Module Switcher */
+.module-switcher{
+  display:flex;align-items:center;gap:0;
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:var(--r);
+  overflow:hidden;
+}
+.ms-btn{
+  padding:8px 20px;font-size:12px;font-weight:500;
+  color:rgba(255,255,255,0.7);
+  background:transparent;border:none;cursor:pointer;
+  font-family:'Source Sans 3',sans-serif;
+  letter-spacing:0.3px;
+  border-right:1px solid rgba(255,255,255,0.15);
+  transition:all 0.2s;display:flex;align-items:center;gap:8px;
+}
+.ms-btn:last-child{border-right:none}
+.ms-btn:hover{background:rgba(255,255,255,0.1);color:var(--white)}
+.ms-btn.on{background:rgba(255,255,255,0.2);color:var(--white);font-weight:600}
+.ms-btn svg{width:16px;height:16px}
+
+/* Role switcher */
+.role-switcher{
+  display:flex;align-items:center;gap:0;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:var(--r);
+  overflow:hidden;
+}
+.rs-btn{
+  padding:6px 14px;font-size:11px;font-weight:500;
+  color:rgba(255,255,255,0.6);
+  background:transparent;border:none;cursor:pointer;
+  font-family:'Source Sans 3',sans-serif;
+  letter-spacing:0.3px;
+  border-right:1px solid rgba(255,255,255,0.1);
+  transition:all 0.15s;display:flex;align-items:center;gap:6px;
+}
+.rs-btn:last-child{border-right:none}
+.rs-btn:hover{color:rgba(255,255,255,0.9);background:rgba(255,255,255,0.1)}
+.rs-btn.on{color:var(--white);background:rgba(255,255,255,0.15);font-weight:600}
+.rs-pip{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.pip-m{background:var(--success)}
+.pip-c{background:var(--warning)}
+.pip-a{background:var(--nepal-red)}
+
+.hd-user{font-size:12px;color:rgba(255,255,255,0.8);display:flex;align-items:center;gap:10px}
+.hd-av{
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:var(--white);
+  flex-shrink:0;border:2px solid rgba(255,255,255,0.3);
+}
+
+/* ── SHELL ── */
+.shell{display:flex;min-height:calc(100vh - 64px)}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:240px;flex-shrink:0;
+  background:var(--bg-sidebar);
+  padding:20px 0 28px;
+  display:flex;flex-direction:column;
+}
+.sb-section{margin-bottom:8px}
+.sb-hd{
+  font-size:9px;font-weight:600;
+  color:rgba(255,255,255,0.35);
+  letter-spacing:2px;text-transform:uppercase;
+  padding:14px 20px 8px;
+}
+.sb-item{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 20px;
+  color:rgba(255,255,255,0.6);
+  cursor:pointer;font-size:13px;
+  border-left:3px solid transparent;
+  transition:all 0.15s;
+  user-select:none;
+}
+.sb-item:hover{color:var(--white);background:rgba(255,255,255,0.08)}
+.sb-item.on{color:var(--white);background:rgba(220,20,60,0.2);border-left-color:var(--nepal-red)}
+.sb-ico{width:18px;text-align:center;flex-shrink:0;opacity:0.8}
+.sb-n{
+  margin-left:auto;font-size:10px;font-weight:600;
+  background:var(--nepal-red);color:var(--white);
+  padding:2px 8px;border-radius:10px;
+}
+.sb-c{margin-left:auto;font-size:11px;color:rgba(255,255,255,0.3)}
+.sb-footer{margin-top:auto;padding:20px}
+
+/* ── MAIN ── */
+.main{flex:1;overflow-y:auto}
+.page{padding:32px}
+
+/* ── PAGE HEADER ── */
+.pg-head{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  margin-bottom:28px;
+  padding-bottom:24px;
+  border-bottom:2px solid var(--border);
+}
+.pg-title{
+  font-family:'Lora',serif;
+  font-size:28px;font-weight:700;
+  color:var(--text-primary);letter-spacing:-0.3px;
+}
+.pg-desc{font-size:14px;color:var(--text-secondary);margin-top:4px}
+.pg-actions{display:flex;gap:10px;align-items:center}
+
+/* ── BUTTONS ── */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 20px;border-radius:var(--r);
+  font-size:13px;font-weight:500;cursor:pointer;
+  border:none;transition:all 0.15s;
+  font-family:'Source Sans 3',sans-serif;
+  white-space:nowrap;letter-spacing:0.1px;
+}
+.btn-primary{background:var(--nepal-blue);color:var(--white)}
+.btn-primary:hover{background:var(--nepal-blue-dark)}
+.btn-accent{background:var(--nepal-red);color:var(--white)}
+.btn-accent:hover{background:var(--nepal-red-dark)}
+.btn-success{background:var(--success);color:var(--white)}
+.btn-ghost{
+  background:transparent;color:var(--text-primary);
+  border:1px solid var(--border);
+}
+.btn-ghost:hover{background:var(--bg-light);border-color:var(--text-muted)}
+.btn-sm{padding:6px 14px;font-size:12px}
+.btn-xs{padding:4px 10px;font-size:11px}
+
+/* ── STAT CARDS ── */
+.stat-strip{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:16px;margin-bottom:28px;
+}
+.stat-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--r2);
+  padding:20px 24px;
+  box-shadow:var(--shadow);
+  position:relative;overflow:hidden;
+}
+.stat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:var(--nepal-blue);
+}
+.stat-card.sc-red::before{background:var(--nepal-red)}
+.stat-card.sc-green::before{background:var(--success)}
+.stat-card.sc-yellow::before{background:var(--warning)}
+.stat-card.sc-purple::before{background:#8B5CF6}
+.s-lbl{font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
+.s-num{
+  font-family:'Lora',serif;font-size:32px;font-weight:700;
+  color:var(--text-primary);margin:8px 0 4px;
+}
+.s-sub{font-size:12px;color:var(--text-secondary)}
+
+/* ── PIPELINE ── */
+.pipeline-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--r2);
+  padding:24px;
+  margin-bottom:28px;
+  box-shadow:var(--shadow);
+}
+.pl-lbl{
+  font-size:10px;font-weight:600;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:1.5px;
+  margin-bottom:20px;
+}
+.pl-track{display:flex;align-items:center;position:relative}
+.pl-step{flex:1;display:flex;flex-direction:column;align-items:center;position:relative}
+.pl-step:not(:last-child)::after{
+  content:'';position:absolute;
+  top:20px;left:50%;width:100%;height:2px;
+  background:var(--border);z-index:0;
+}
+.pl-step.s-done:not(:last-child)::after{background:var(--success)}
+.pl-step.s-active:not(:last-child)::after{background:var(--warning)}
+.pl-node{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;
+  position:relative;z-index:1;
+  border:2px solid var(--border);
+  background:var(--white);
+  color:var(--text-muted);
+  font-family:'Lora',serif;
+}
+.pl-node.s-done{background:var(--success);border-color:var(--success);color:var(--white)}
+.pl-node.s-active{background:var(--nepal-blue);border-color:var(--nepal-blue);color:var(--white)}
+.pl-node.s-warn{background:var(--warning);border-color:var(--warning);color:var(--white)}
+.pl-txt{font-size:12px;font-weight:500;color:var(--text-muted);margin-top:10px;text-align:center}
+.pl-txt.s-done{color:var(--success)}
+.pl-txt.s-active{color:var(--nepal-blue);font-weight:600}
+.pl-who{font-size:10px;color:var(--text-muted);text-align:center;margin-top:2px}
+
+/* ── TABLE ── */
+.table-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--r2);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.tc-top{
+  padding:16px 24px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(to right,var(--bg-light),var(--white));
+}
+.tc-title{font-size:14px;font-weight:600;color:var(--text-primary);font-family:'Lora',serif}
+.filter-row{display:flex;gap:6px}
+.ftag{
+  padding:4px 14px;border-radius:20px;
+  border:1px solid var(--border);background:transparent;
+  font-size:11px;font-weight:500;color:var(--text-secondary);
+  cursor:pointer;transition:all 0.13s;
+  font-family:'Source Sans 3',sans-serif;
+}
+.ftag:hover{border-color:var(--nepal-blue);color:var(--nepal-blue)}
+.ftag.on{background:var(--nepal-blue);color:var(--white);border-color:var(--nepal-blue)}
+
+.search-row{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 24px;border-bottom:1px solid var(--border);
+  background:var(--white);
+}
+.search-ico{color:var(--text-muted);flex-shrink:0}
+.s-input{
+  flex:1;border:none;outline:none;background:transparent;
+  font-family:'Source Sans 3',sans-serif;font-size:13px;color:var(--text-primary);
+}
+.s-input::placeholder{color:var(--text-muted)}
+
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+thead tr{background:var(--bg-light)}
+th{
+  padding:10px 16px;text-align:left;
+  font-size:9px;font-weight:600;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:1px;
+  border-bottom:1px solid var(--border);white-space:nowrap;
+}
+td{padding:14px 16px;border-bottom:1px solid var(--border-light);font-size:13px;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr.mrow:hover td{background:rgba(0,56,147,0.03);cursor:pointer}
+
+.ref-no{font-family:'Inconsolata',monospace;font-size:11px;color:var(--text-muted)}
+.memo-subj{font-weight:500;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.memo-from{font-size:11px;color:var(--text-secondary);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Status chips */
+.chip{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 10px;border-radius:20px;
+  font-size:10px;font-weight:600;letter-spacing:0.4px;
+  white-space:nowrap;
+}
+.chip::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.ch-draft{background:#EEF2FF;color:#4338CA}.ch-draft::before{background:#4338CA}
+.ch-submitted{background:#FEF3C7;color:#92400E}.ch-submitted::before{background:#F59E0B}
+.ch-checking{background:#DBEAFE;color:#1E40AF}.ch-checking::before{background:#3B82F6}
+.ch-approved{background:#D1FAE5;color:#065F46}.ch-approved::before{background:#10B981}
+.ch-rejected{background:#FEE2E2;color:#991B1B}.ch-rejected::before{background:#EF4444}
+.ch-pending{background:#FEF3C7;color:#92400E}.ch-pending::before{background:#F59E0B}
+.ch-approved-lv{background:#D1FAE5;color:#065F46}.ch-approved-lv::before{background:#10B981}
+
+.rpill{padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;letter-spacing:0.3px}
+.rp-m{background:#D1FAE5;color:#065F46}
+.rp-c{background:#FEF3C7;color:#92400E}
+.rp-a{background:#FEE2E2;color:#991B1B}
+
+.act-row{display:flex;gap:6px}
+.act-btn{
+  width:30px;height:30px;border-radius:var(--r);
+  border:1px solid var(--border);background:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:12px;color:var(--text-muted);
+  transition:all 0.13s;
+}
+.act-btn:hover{background:var(--nepal-blue);color:var(--white);border-color:var(--nepal-blue)}
+.act-btn svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.8;fill:none}
+
+.empty-state{padding:60px 24px;text-align:center;color:var(--text-muted)}
+.empty-icon{font-size:40px;margin-bottom:16px;opacity:0.4}
+.empty-msg{font-size:14px}
+
+/* ── LEAVE CARD ── */
+.leave-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--r2);
+  padding:16px 20px;
+  display:flex;align-items:center;gap:16px;
+  margin-bottom:12px;
+  transition:all 0.15s;
+  box-shadow:var(--shadow);
+}
+.leave-card:hover{box-shadow:var(--shadow-md);border-color:var(--nepal-blue)}
+.lc-av{
+  width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,var(--nepal-blue),var(--nepal-blue-light));
+  display:flex;align-items:center;justify-content:center;
+  color:var(--white);font-weight:700;font-size:14px;
+  flex-shrink:0;
+}
+.lc-info{flex:1}
+.lc-name{font-weight:600;color:var(--text-primary);font-size:14px}
+.lc-type{font-size:12px;color:var(--text-secondary);margin-top:2px}
+.lc-dates{font-size:12px;color:var(--text-muted)}
+.lc-status{margin-left:auto}
+
+/* ── BALANCE CARDS ── */
+.balance-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:14px;margin-bottom:24px;
+}
+.balance-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--r2);
+  padding:18px 20px;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+.bc-type{font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
+.bc-used{
+  font-family:'Lora',serif;font-size:28px;font-weight:700;
+  color:var(--nepal-blue);margin:8px 0 4px;
+}
+.bc-total{font-size:12px;color:var(--text-secondary)}
+.bc-total span{font-weight:600;color:var(--text-primary)}
+
+/* ── CALENDAR ── */
+.calendar-grid{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  gap:4px;margin-top:12px;
+}
+.cal-day{
+  aspect-ratio:1;text-align:center;
+  padding:8px 4px;font-size:11px;
+  border-radius:6px;cursor:pointer;
+  transition:all 0.1s;
+}
+.cal-day:hover{background:var(--bg-light)}
+.cal-day.header{font-weight:600;color:var(--text-muted);cursor:default}
+.cal-day.leave{background:rgba(220,20,60,0.1);color:var(--nepal-red);font-weight:600}
+.cal-day.today{background:var(--nepal-blue);color:var(--white);font-weight:600}
+.cal-day.weekend{color:var(--text-muted)}
+
+/* ── OVERLAY & MODAL ── */
+.overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,32,96,0.6);
+  z-index:400;
+  align-items:flex-start;justify-content:center;
+  padding:40px 20px;
+  backdrop-filter:blur(4px);
+}
+.overlay.open{display:flex}
+.modal{
+  background:var(--white);
+  border-radius:var(--r3);
+  width:800px;max-width:100%;
+  max-height:calc(100vh - 80px);overflow-y:auto;
+  box-shadow:var(--shadow-lg);
+  border-top:5px solid var(--nepal-red);
+}
+.modal-lg{width:1000px}
+.m-head{
+  padding:24px 28px 20px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:flex-start;justify-content:space-between;
+  background:linear-gradient(to right,var(--bg-light),var(--white));
+  position:sticky;top:0;z-index:1;
+}
+.m-htitle{font-family:'Lora',serif;font-size:20px;font-weight:700;color:var(--text-primary)}
+.m-hsub{font-size:12px;color:var(--text-secondary);margin-top:4px}
+.m-close{
+  width:32px;height:32px;border-radius:50%;
+  border:1px solid var(--border);background:transparent;
+  cursor:pointer;font-size:14px;color:var(--text-muted);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-left:16px;transition:all 0.13s;
+}
+.m-close:hover{background:var(--nepal-blue);color:var(--white);border-color:var(--nepal-blue)}
+.m-body{padding:24px 28px}
+.m-foot{
+  padding:18px 28px 24px;
+  border-top:1px solid var(--border);
+  display:flex;gap:10px;justify-content:flex-end;
+  background:var(--bg-light);
+}
+
+/* Form */
+.fsec{
+  font-size:10px;font-weight:600;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:1.5px;
+  margin:24px 0 14px;padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+}
+.fsec:first-child{margin-top:0}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.fg label{font-size:11px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.8px}
+.fg input,.fg select,.fg textarea{
+  border:1px solid var(--border);border-radius:var(--r);
+  padding:10px 14px;font-size:13px;
+  font-family:'Source Sans 3',sans-serif;
+  color:var(--text-primary);background:var(--white);
+  outline:none;width:100%;transition:border-color 0.14s;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--nepal-blue)}
+.fg textarea{resize:vertical;min-height:80px;line-height:1.6}
+.req{color:var(--nepal-red)}
+
+/* ── DETAIL LAYOUT ── */
+.detail-wrap{display:grid;grid-template-columns:1fr 260px;gap:20px}
+
+/* Memo Paper */
+.memo-paper{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--r2);
+  padding:32px 36px;
+  box-shadow:var(--shadow);
+  font-family:'Lora',serif;
+  margin-bottom:18px;
+  position:relative;
+}
+.memo-paper::before{
+  content:'';position:absolute;
+  left:0;top:0;bottom:0;width:4px;
+  border-radius:var(--r2) 0 0 var(--r2);
+}
+.mp-draft::before{background:#4338CA}
+.mp-submitted::before{background:#F59E0B}
+.mp-checking::before{background:#3B82F6}
+.mp-approved::before{background:#10B981}
+.mp-rejected::before{background:#EF4444}
+
+.mp-masthead{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  margin-bottom:20px;padding-bottom:18px;
+  border-bottom:2px solid var(--nepal-blue);
+}
+.mp-org{font-size:20px;font-weight:700;color:var(--nepal-blue);letter-spacing:-0.2px}
+.mp-org-sub{font-size:11px;color:var(--text-secondary);margin-top:4px;font-family:'Source Sans 3',sans-serif;font-style:italic}
+.mp-doc-label{
+  font-family:'Source Sans 3',sans-serif;
+  font-size:10px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--white);
+  background:var(--nepal-red);
+  padding:5px 14px;border-radius:var(--r);
+  margin-top:4px;
+}
+.mp-fields{
+  display:grid;grid-template-columns:100px 1fr;
+  gap:6px 14px;margin-bottom:20px;
+  font-family:'Source Sans 3',sans-serif;
+  font-size:13px;
+}
+.mp-fields dt{font-weight:600;color:var(--text-secondary)}
+.mp-fields dd{color:var(--text-primary)}
+.mp-subject-line{
+  font-size:15px;font-weight:700;color:var(--text-primary);
+  padding:12px 14px;
+  background:linear-gradient(to right,rgba(0,56,147,0.05),rgba(0,56,147,0.02));
+  border-left:4px solid var(--nepal-blue);
+  border-radius:0 var(--r) var(--r) 0;
+  margin-bottom:20px;
+  font-family:'Source Sans 3',sans-serif;
+}
+.mp-section-title{
+  font-family:'Source Sans 3',sans-serif;
+  font-size:10px;font-weight:600;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:1.2px;
+  margin-bottom:8px;
+}
+.mp-text{
+  font-size:13px;color:var(--text-secondary);line-height:1.8;
+  font-family:'Source Sans 3',sans-serif;
+  margin-bottom:18px;
+}
+.mp-hr{border:none;border-top:1px solid var(--border);margin:20px 0}
+.mp-sig-row{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  margin-top:24px;padding-top:20px;border-top:1px solid var(--border);
+}
+.sig-col{text-align:center}
+.sig-line{
+  height:40px;border-bottom:1px solid var(--text-muted);
+  margin-bottom:8px;
+  position:relative;
+}
+.sig-line.signed::after{
+  content:'✓';
+  position:absolute;bottom:6px;left:50%;transform:translateX(-50%);
+  font-size:20px;color:var(--success);
+  font-family:'Source Sans 3',sans-serif;
+}
+.sig-name{font-size:12px;font-weight:600;color:var(--text-primary);font-family:'Source Sans 3',sans-serif}
+.sig-role{font-size:10px;color:var(--text-muted);font-family:'Source Sans 3',sans-serif}
+
+/* Timeline */
+.content-block{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r2);padding:18px 20px;margin-bottom:16px;
+  box-shadow:var(--shadow);
+}
+.cb-title{
+  font-size:10px;font-weight:600;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:1.2px;
+  margin-bottom:14px;padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+}
+.tl{display:flex;flex-direction:column}
+.tl-item{display:flex;gap:12px;padding-bottom:16px;position:relative}
+.tl-item:not(:last-child)::before{
+  content:'';position:absolute;left:14px;top:28px;bottom:0;
+  width:2px;background:var(--border);
+}
+.tl-ico{
+  width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;flex-shrink:0;z-index:1;
+  border:2px solid var(--border);
+  font-family:'Source Sans 3',sans-serif;
+}
+.ti-c{background:#EEF2FF;color:#4338CA;border-color:#818CF8}
+.ti-s{background:#FEF3C7;color:#92400E;border-color:#FCD34D}
+.ti-ch{background:#DBEAFE;color:#1E40AF;border-color:#93C5FD}
+.ti-ok{background:#D1FAE5;color:#065F46;border-color:#6EE7B7}
+.ti-r{background:#FEE2E2;color:#991B1B;border-color:#FCA5A5}
+.ti-lv{background:#D1FAE5;color:#065F46;border-color:#6EE7B7}
+.ti-lr{background:#FEE2E2;color:#991B1B;border-color:#FCA5A5}
+
+.tl-body{flex:1}
+.tl-act{font-size:13px;font-weight:500;color:var(--text-primary)}
+.tl-meta{font-size:11px;color:var(--text-muted);margin-top:2px}
+.tl-note{
+  margin-top:8px;font-size:12px;color:var(--text-secondary);
+  background:var(--bg-light);
+  border-left:3px solid var(--border);
+  padding:8px 12px;font-style:italic;line-height:1.6;
+}
+
+/* Action Panel */
+.action-panel{
+  background:linear-gradient(to right,rgba(0,56,147,0.02),rgba(220,20,60,0.02));
+  border:1.5px solid var(--border);
+  border-radius:var(--r2);
+  padding:18px 20px;margin-top:16px;
+}
+.ap-hd{
+  font-size:11px;font-weight:600;color:var(--text-primary);
+  text-transform:uppercase;letter-spacing:0.8px;
+  margin-bottom:12px;padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+}
+.ap-ta{
+  border:1px solid var(--border);border-radius:var(--r);
+  padding:10px 14px;font-size:13px;
+  font-family:'Source Sans 3',sans-serif;
+  color:var(--text-primary);background:var(--white);
+  outline:none;width:100%;resize:vertical;min-height:70px;
+  line-height:1.6;margin-bottom:12px;
+  transition:border-color 0.14s;
+}
+.ap-ta:focus{border-color:var(--nepal-blue)}
+.ap-btns{display:flex;gap:10px;flex-wrap:wrap}
+
+/* Side Panel */
+.side-panel{display:flex;flex-direction:column;gap:14px}
+.side-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--r2);padding:16px 18px;
+  box-shadow:var(--shadow);
+}
+.sc-hd{
+  font-size:10px;font-weight:600;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:1.2px;
+  margin-bottom:12px;padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+.progress-steps{display:flex;flex-direction:column;gap:8px}
+.ps-item{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 10px;border-radius:var(--r);
+  border:1px solid var(--border);background:var(--bg-light);
+  font-size:12px;color:var(--text-secondary);
+}
+.ps-item.ps-done{background:#D1FAE5;border-color:#6EE7B7;color:#065F46}
+.ps-item.ps-cur{background:#FEE2E2;border-color:#FCA5A5;color:#991B1B}
+.ps-item.ps-wait{background:var(--bg-light);border-color:var(--border);color:var(--text-muted)}
+.ps-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ps-done .ps-dot{background:#10B981}
+.ps-cur .ps-dot{background:#EF4444}
+.ps-wait .ps-dot{background:var(--text-muted)}
+.ps-label{font-weight:500;flex:1}
+.ps-who{font-size:10px;color:inherit;opacity:0.7;margin-left:auto}
+
+.person-row{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 0;border-bottom:1px solid var(--border-light);
+}
+.person-row:last-child{border-bottom:none}
+.p-av{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:var(--white);flex-shrink:0;
+}
+.av-m{background:var(--success)}
+.av-c{background:var(--warning)}
+.av-a{background:var(--nepal-red)}
+.av-h{background:#8B5CF6}
+.p-name{font-size:12px;font-weight:500;color:var(--text-primary)}
+.p-title{font-size:10px;color:var(--text-muted)}
+
+.meta-rows{display:flex;flex-direction:column;gap:10px}
+.meta-row label{font-size:9px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px;display:block;margin-bottom:3px}
+.meta-row span{font-size:12px;color:var(--text-secondary)}
+
+/* Toast */
+.toast-wrap{position:fixed;bottom:24px;right:24px;z-index:999;display:flex;flex-direction:column;gap:10px}
+.toast{
+  background:var(--bg-sidebar);color:var(--white);
+  padding:14px 20px;border-radius:var(--r);
+  font-size:13px;box-shadow:var(--shadow-lg);
+  display:flex;align-items:center;gap:10px;
+  max-width:360px;
+  border-left:4px solid var(--success);
+  transform:translateX(400px);
+  transition:transform 0.3s cubic-bezier(.2,.8,.2,1);
+}
+.toast.show{transform:translateX(0)}
+.toast.err{border-left-color:var(--nepal-red)}
+
+/* Guide Section */
+.guide-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.guide-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--r2);
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+.gc-icon{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;margin-bottom:16px;
+}
+.gc-blue{background:rgba(0,56,147,0.1);color:var(--nepal-blue)}
+.gc-yellow{background:rgba(245,158,11,0.1);color:var(--warning)}
+.gc-red{background:rgba(220,20,60,0.1);color:var(--nepal-red)}
+.gc-title{font-family:'Lora',serif;font-size:16px;font-weight:700;color:var(--text-primary);margin-bottom:8px}
+.gc-desc{font-size:13px;color:var(--text-secondary);line-height:1.7}
+
+/* Responsive */
+@media(max-width:1024px){
+  .sidebar{width:200px}
+  .fgrid{grid-template-columns:1fr}
+  .detail-wrap{grid-template-columns:1fr}
+  .balance-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .sidebar{display:none}
+  .stat-strip{grid-template-columns:1fr 1fr}
+  .guide-grid{grid-template-columns:1fr}
+  .module-switcher{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- HEADER -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<header class="header">
+  <div class="hd-brand">
+    <div class="hd-logo">
+      <span class="hd-logo-text">NIF</span>
+    </div>
+    <div>
+      <div class="hd-name">Nepal Internet Foundation</div>
+      <div class="hd-sub">Integrated Portal System</div>
+    </div>
+    <div class="hd-sep"></div>
+    <div style="font-size:11px;color:rgba(255,255,255,0.5)">B.S. 2081</div>
+  </div>
+  <div class="hd-right">
+    <div class="module-switcher">
+      <button class="ms-btn on" onclick="switchModule('leave',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Leave Management
+      </button>
+      <button class="ms-btn" onclick="switchModule('memo',this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+        Memo Approval
+      </button>
+    </div>
+    <div class="role-switcher">
+      <button class="rs-btn on" onclick="switchRole('maker',this)"><span class="rs-pip pip-m"></span>Maker</button>
+      <button class="rs-btn" onclick="switchRole('checker',this)"><span class="rs-pip pip-c"></span>Checker</button>
+      <button class="rs-btn" onclick="switchRole('approver',this)"><span class="rs-pip pip-a"></span>Approver</button>
+    </div>
+    <div class="hd-user">
+      <div class="hd-av" id="hd-av" style="background:#10B981">RB</div>
+      <div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.95)" id="hd-name">Ram Bahadur Khatri</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.6)" id="hd-role">Programme Director · Maker</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- LEAVE SIDEBAR -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<nav class="sidebar" id="sidebar-leave">
+  <div class="sb-section">
+    <div class="sb-hd">Overview</div>
+    <div class="sb-item on" data-view="lv-dashboard" onclick="goTo('lv-dashboard',this)">
+      <span class="sb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
+      Dashboard
+    </div>
+  </div>
+  <div class="sb-section">
+    <div class="sb-hd">Leave Management</div>
+    <div class="sb-item" data-view="lv-apply" onclick="goTo('lv-apply',this)">
+      <span class="sb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span>
+      Apply for Leave
+    </div>
+    <div class="sb-item" data-view="lv-my" onclick="goTo('lv-my',this)">
+      <span class="sb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg></span>
+      My Applications
+      <span class="sb-c" id="sbc-my">0</span>
+    </div>
+    <div class="sb-item" data-view="lv-pending" onclick="goTo('lv-pending',this)">
+      <span class="sb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+      Pending Approval
+      <span class="sb-n" id="sbn-pending" style="display:none">0</span>
+    </div>
+  </div>
+  <div class="sb-section">
+    <div class="sb-hd">Team</div>
+    <div class="sb-item" data-view="lv-team" onclick="goTo('lv-team',this)">
+      <span class="sb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></span>
+      Team Calendar
+    </div>
+  </div>
+  <div class="sb-section sb-footer">
+    <div class="sb-item" onclick="showGuide()">
+      <span class="sb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span>
+      User Guide
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- MEMO SIDEBAR -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<nav class="sidebar" id="sidebar-memo" style="display:none">
+  <div class="sb-section">
+    <div class="sb-hd">Workspace</div>
+    <div class="sb-item on" data-view="mm-dashboard" onclick="goTo('mm-dashboard',this)">
+      <span class="sb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
+      Dashboard
+    </div>
+    <div class="sb-item" data-view="mm-all" onclick="goTo('mm-all',this)">
+      <span class="sb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></span>
+      All Memos
+      <span class="sb-c" id="sbc-all-memo">0</span>
+    </div>
+    <div class="sb-item" data-view="mm-drafts" onclick="goTo('mm-drafts',this)">
+      <span class="sb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
+      My Drafts
+      <span class="sb-c" id="sbc-draft-memo">0</span>
+    </div>
+  </div>
+  <div class="sb-section">
+    <div class="sb-hd">Workflow</div>
+    <div class="sb-item" data-view="mm-submitted" onclick="goTo('mm-submitted',this)">
+      <span class="sb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></span>
+      Submitted
+      <span class="sb-n" id="sbn-sub-memo" style="display:none">0</span>
+    </div>
+    <div class="sb-item" data-view="mm-review" onclick="goTo('mm-review',this)">
+      <span class="sb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+      Under Review
+      <span class="sb-n" id="sbn-chk-memo" style="display:none">0</span>
+    </div>
+    <div class="sb-item" data-view="mm-approved" onclick="goTo('mm-approved',this)">
+      <span class="sb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></span>
+      Approved
+      <span class="sb-c" id="sbc-ok-memo">0</span>
+    </div>
+    <div class="sb-item" data-view="mm-returned" onclick="goTo('mm-returned',this)">
+      <span class="sb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></span>
+      Returned
+      <span class="sb-c" id="sbc-ret-memo">0</span>
+    </div>
+  </div>
+  <div class="sb-section sb-footer">
+    <div class="sb-item" onclick="showGuide()">
+      <span class="sb-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span>
+      Workflow Guide
+    </div>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- LEAVE: DASHBOARD -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="view-lv-dashboard" class="page">
+  <div class="pg-head">
+    <div>
+      <div class="pg-title">Leave Dashboard</div>
+      <div class="pg-desc">Manage your leave balance and applications</div>
+    </div>
+    <div class="pg-actions">
+      <button class="btn btn-accent" onclick="goTo('lv-apply',null)">+ Apply for Leave</button>
+    </div>
+  </div>
+
+  <div class="balance-grid">
+    <div class="balance-card">
+      <div class="bc-type">Annual Leave</div>
+      <div class="bc-used">18</div>
+      <div class="bc-total">Remaining: <span>12</span> / 30 days</div>
+    </div>
+    <div class="balance-card">
+      <div class="bc-type">Sick Leave</div>
+      <div class="bc-used">5</div>
+      <div class="bc-total">Remaining: <span>5</span> / 12 days</div>
+    </div>
+    <div class="balance-card">
+      <div class="bc-type">Casual Leave</div>
+      <div class="bc-used">3</div>
+      <div class="bc-total">Remaining: <span>7</span> / 10 days</div>
+    </div>
+    <div class="balance-card">
+      <div class="bc-type">Other</div>
+      <div class="bc-used">2</div>
+      <div class="bc-total">Taken this year</div>
+    </div>
+  </div>
+
+  <div class="stat-strip">
+    <div class="stat-card">
+      <div class="s-lbl">Total Applications</div>
+      <div class="s-num" id="lv-st-total">12</div>
+      <div class="s-sub">This fiscal year</div>
+    </div>
+    <div class="stat-card sc-yellow">
+      <div class="s-lbl">Pending</div>
+      <div class="s-num" id="lv-st-pending">1</div>
+      <div class="s-sub">Awaiting approval</div>
+    </div>
+    <div class="stat-card sc-green">
+      <div class="s-lbl">Approved</div>
+      <div class="s-num" id="lv-st-approved">9</div>
+      <div class="s-sub">Approved this year</div>
+    </div>
+    <div class="stat-card sc-red">
+      <div class="s-lbl">Rejected</div>
+      <div class="s-num" id="lv-st-rejected">2</div>
+      <div class="s-sub">Applications denied</div>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="tc-top">
+      <span class="tc-title">Recent Applications</span>
+      <button class="btn btn-ghost btn-xs" onclick="goTo('lv-my',null)">View all →</button>
+    </div>
+    <div id="lv-recent-table"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- LEAVE: APPLY -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="view-lv-apply" class="page" style="display:none">
+  <div class="pg-head">
+    <div>
+      <div class="pg-title">Apply for Leave</div>
+      <div class="pg-desc">Submit a new leave application for approval</div>
+    </div>
+  </div>
+
+  <div class="table-card" style="padding:24px">
+    <div class="fgrid">
+      <div class="fg">
+        <label>Leave Type <span class="req">*</span></label>
+        <select id="lv-type">
+          <option>Annual Leave</option>
+          <option>Sick Leave</option>
+          <option>Casual Leave</option>
+          <option>Unpaid Leave</option>
+          <option>Work from Home</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Priority</label>
+        <select id="lv-priority">
+          <option>Normal</option>
+          <option>Urgent</option>
+        </select>
+      </div>
+    </div>
+    <div class="fgrid">
+      <div class="fg">
+        <label>Start Date <span class="req">*</span></label>
+        <input type="date" id="lv-start">
+      </div>
+      <div class="fg">
+        <label>End Date <span class="req">*</span></label>
+        <input type="date" id="lv-end">
+      </div>
+    </div>
+    <div class="fgrid">
+      <div class="fg">
+        <label>Reporting Manager <span class="req">*</span></label>
+        <select id="lv-manager">
+          <option>Sita Koirala — Programme Manager</option>
+          <option>Rajesh Tamang — Finance Officer</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Contact During Leave</label>
+        <input type="text" id="lv-contact" placeholder="Phone or email">
+      </div>
+    </div>
+    <div class="fg">
+      <label>Reason for Leave <span class="req">*</span></label>
+      <textarea id="lv-reason" placeholder="Provide detailed reason for your leave application..."></textarea>
+    </div>
+    <div class="fg">
+      <label>Work Handover Notes</label>
+      <textarea id="lv-handover" placeholder="Describe any pending tasks or handover instructions..." style="min-height:60px"></textarea>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button class="btn btn-ghost" onclick="goTo('lv-dashboard',null)">Cancel</button>
+      <button class="btn btn-primary" onclick="submitLeave()">Submit Application</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- LEAVE: MY APPLICATIONS -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="view-lv-my" class="page" style="display:none">
+  <div class="pg-head">
+    <div>
+      <div class="pg-title">My Applications</div>
+      <div class="pg-desc">Track all your leave applications</div>
+    </div>
+    <div class="pg-actions">
+      <button class="btn btn-accent" onclick="goTo('lv-apply',null)">+ New Application</button>
+    </div>
+  </div>
+  <div class="table-card">
+    <div class="tc-top">
+      <span class="tc-title">Applications</span>
+      <div class="filter-row">
+        <button class="ftag on" onclick="lvSetFilter('all',this)">All</button>
+        <button class="ftag" onclick="lvSetFilter('pending',this)">Pending</button>
+        <button class="ftag" onclick="lvSetFilter('approved',this)">Approved</button>
+        <button class="ftag" onclick="lvSetFilter('rejected',this)">Rejected</button>
+      </div>
+    </div>
+    <div id="lv-my-table"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- LEAVE: PENDING APPROVAL -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="view-lv-pending" class="page" style="display:none">
+  <div class="pg-head">
+    <div>
+      <div class="pg-title">Pending Approvals</div>
+      <div class="pg-desc">Review and approve team leave applications</div>
+    </div>
+  </div>
+  <div id="lv-pending-list"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- LEAVE: TEAM CALENDAR -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="view-lv-team" class="page" style="display:none">
+  <div class="pg-head">
+    <div>
+      <div class="pg-title">Team Calendar</div>
+      <div class="pg-desc">View team availability and scheduled leaves</div>
+    </div>
+  </div>
+  <div class="table-card" style="padding:24px">
+    <div style="font-weight:600;color:var(--text-primary);margin-bottom:16px">March 2081 - Team Availability</div>
+    <div class="calendar-grid">
+      <div class="cal-day header">Sun</div>
+      <div class="cal-day header">Mon</div>
+      <div class="cal-day header">Tue</div>
+      <div class="cal-day header">Wed</div>
+      <div class="cal-day header">Thu</div>
+      <div class="cal-day header">Fri</div>
+      <div class="cal-day header">Sat</div>
+      <div class="cal-day"></div>
+      <div class="cal-day">1</div>
+      <div class="cal-day">2</div>
+      <div class="cal-day">3</div>
+      <div class="cal-day">4</div>
+      <div class="cal-day">5</div>
+      <div class="cal-day weekend">6</div>
+      <div class="cal-day weekend">7</div>
+      <div class="cal-day">8</div>
+      <div class="cal-day">9</div>
+      <div class="cal-day today">10</div>
+      <div class="cal-day">11</div>
+      <div class="cal-day leave">12</div>
+      <div class="cal-day leave">13</div>
+      <div class="cal-day weekend">14</div>
+      <div class="cal-day">15</div>
+      <div class="cal-day">16</div>
+      <div class="cal-day">17</div>
+      <div class="cal-day">18</div>
+      <div class="cal-day">19</div>
+      <div class="cal-day weekend">20</div>
+      <div class="cal-day weekend">21</div>
+      <div class="cal-day">22</div>
+      <div class="cal-day">23</div>
+      <div class="cal-day">24</div>
+      <div class="cal-day leave">25</div>
+      <div class="cal-day leave">26</div>
+      <div class="cal-day weekend">27</div>
+      <div class="cal-day weekend">28</div>
+      <div class="cal-day">29</div>
+      <div class="cal-day">30</div>
+      <div class="cal-day">31</div>
+    </div>
+    <div style="display:flex;gap:20px;margin-top:20px;font-size:12px;color:var(--text-secondary)">
+      <span><span style="display:inline-block;width:12px;height:12px;background:var(--nepal-blue);border-radius:3px;margin-right:6px;vertical-align:middle"></span>Today</span>
+      <span><span style="display:inline-block;width:12px;height:12px;background:rgba(220,20,60,0.1);border-radius:3px;margin-right:6px;vertical-align:middle"></span>Team Leave</span>
+    </div>
+  </div>
+  <div class="table-card" style="margin-top:20px">
+    <div class="tc-top">
+      <span class="tc-title">Upcoming Leaves</span>
+    </div>
+    <div style="padding:16px 24px">
+      <div class="leave-card">
+        <div class="lc-av">SK</div>
+        <div class="lc-info">
+          <div class="lc-name">Sita Koirala</div>
+          <div class="lc-type">Annual Leave</div>
+          <div class="lc-dates">Chaitra 12-13, 2081 (2 days)</div>
+        </div>
+        <div class="lc-status"><span class="chip ch-approved-lv">Approved</span></div>
+      </div>
+      <div class="leave-card">
+        <div class="lc-av">RT</div>
+        <div class="lc-info">
+          <div class="lc-name">Rajesh Tamang</div>
+          <div class="lc-type">Sick Leave</div>
+          <div class="lc-dates">Chaitra 25-26, 2081 (2 days)</div>
+        </div>
+        <div class="lc-status"><span class="chip ch-pending">Pending</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- MEMO: DASHBOARD -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="view-mm-dashboard" class="page" style="display:none">
+  <div class="pg-head">
+    <div>
+      <div class="pg-title">Memo Dashboard</div>
+      <div class="pg-desc">Maker · Checker · Approver — three-level approval workflow</div>
+    </div>
+    <div class="pg-actions">
+      <button class="btn btn-ghost btn-sm" onclick="goTo('mm-all',null)">View registry</button>
+      <button class="btn btn-accent" onclick="openNewMemo()">+ Draft New Memo</button>
+    </div>
+  </div>
+
+  <div class="stat-strip">
+    <div class="stat-card">
+      <div class="s-lbl">Total Memos</div>
+      <div class="s-num" id="mm-st-all">0</div>
+      <div class="s-sub">All documents</div>
+    </div>
+    <div class="stat-card sc-purple">
+      <div class="s-lbl">Drafts</div>
+      <div class="s-num" id="mm-st-draft">0</div>
+      <div class="s-sub">Being prepared</div>
+    </div>
+    <div class="stat-card sc-yellow">
+      <div class="s-lbl">Pending Action</div>
+      <div class="s-num" id="mm-st-pend">0</div>
+      <div class="s-sub">Awaiting review</div>
+    </div>
+    <div class="stat-card sc-green">
+      <div class="s-lbl">Approved</div>
+      <div class="s-num" id="mm-st-ok">0</div>
+      <div class="s-sub">Cleared & filed</div>
+    </div>
+    <div class="stat-card sc-red">
+      <div class="s-lbl">Returned</div>
+      <div class="s-num" id="mm-st-ret">0</div>
+      <div class="s-sub">Needs revision</div>
+    </div>
+  </div>
+
+  <div class="pipeline-card">
+    <div class="pl-lbl">Approval Pipeline — Workflow Stages</div>
+    <div class="pl-track">
+      <div class="pl-step s-done">
+        <div class="pl-node s-done">✓</div>
+        <div class="pl-txt s-done">Draft</div>
+        <div class="pl-who">Maker</div>
+      </div>
+      <div class="pl-step s-done">
+        <div class="pl-node s-done">✓</div>
+        <div class="pl-txt s-done">Submitted</div>
+        <div class="pl-who">Maker</div>
+      </div>
+      <div class="pl-step s-active">
+        <div class="pl-node s-warn">3</div>
+        <div class="pl-txt s-active">Checker Review</div>
+        <div class="pl-who">Checker</div>
+      </div>
+      <div class="pl-step">
+        <div class="pl-node">4</div>
+        <div class="pl-txt">Approval</div>
+        <div class="pl-who">Approver</div>
+      </div>
+      <div class="pl-step">
+        <div class="pl-node">5</div>
+        <div class="pl-txt">Approved & Filed</div>
+        <div class="pl-who">Director</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="tc-top">
+      <span class="tc-title">Recent Activity</span>
+      <button class="btn btn-ghost btn-xs" onclick="goTo('mm-all',null)">View all →</button>
+    </div>
+    <div id="mm-dash-rows"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- MEMO: ALL MEMOS -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="view-mm-all" class="page" style="display:none">
+  <div class="pg-head">
+    <div>
+      <div class="pg-title">Memo Registry</div>
+      <div class="pg-desc">All internal memos — browse, filter and manage</div>
+    </div>
+    <div class="pg-actions">
+      <button class="btn btn-accent" onclick="openNewMemo()">+ Draft New Memo</button>
+    </div>
+  </div>
+  <div class="table-card">
+    <div class="tc-top">
+      <span class="tc-title">Memos</span>
+      <div class="filter-row">
+        <button class="ftag on" onclick="mmSetFilter('all',this)">All</button>
+        <button class="ftag" onclick="mmSetFilter('draft',this)">Draft</button>
+        <button class="ftag" onclick="mmSetFilter('submitted',this)">Submitted</button>
+        <button class="ftag" onclick="mmSetFilter('checking',this)">Checking</button>
+        <button class="ftag" onclick="mmSetFilter('approved',this)">Approved</button>
+        <button class="ftag" onclick="mmSetFilter('rejected',this)">Returned</button>
+      </div>
+    </div>
+    <div class="search-row">
+      <span class="search-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+      <input class="s-input" type="text" placeholder="Search by subject, reference, or sender..." oninput="mmOnSearch(this.value)">
+    </div>
+    <div id="mm-rows"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- MEMO: DRAFTS -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="view-mm-drafts" class="page" style="display:none">
+  <div class="pg-head">
+    <div>
+      <div class="pg-title">My Drafts</div>
+      <div class="pg-desc">Continue working on your draft memos</div>
+    </div>
+  </div>
+  <div class="table-card">
+    <div class="tc-top">
+      <span class="tc-title">Draft Memos</span>
+    </div>
+    <div id="mm-draft-rows"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- MEMO: SUBMITTED -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="view-mm-submitted" class="page" style="display:none">
+  <div class="pg-head">
+    <div>
+      <div class="pg-title">Submitted Memos</div>
+      <div class="pg-desc">Memos awaiting checker review</div>
+    </div>
+  </div>
+  <div class="table-card">
+    <div class="tc-top">
+      <span class="tc-title">Awaiting Review</span>
+    </div>
+    <div id="mm-sub-rows"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- MEMO: UNDER REVIEW -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="view-mm-review" class="page" style="display:none">
+  <div class="pg-head">
+    <div>
+      <div class="pg-title">Under Review</div>
+      <div class="pg-desc">Memos checked and forwarded for approval</div>
+    </div>
+  </div>
+  <div class="table-card">
+    <div class="tc-top">
+      <span class="tc-title">Pending Approval</span>
+    </div>
+    <div id="mm-chk-rows"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- MEMO: APPROVED -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="view-mm-approved" class="page" style="display:none">
+  <div class="pg-head">
+    <div>
+      <div class="pg-title">Approved Memos</div>
+      <div class="pg-desc">Cleared and filed memos</div>
+    </div>
+  </div>
+  <div class="table-card">
+    <div class="tc-top">
+      <span class="tc-title">Approved</span>
+    </div>
+    <div id="mm-ok-rows"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- MEMO: RETURNED -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="view-mm-returned" class="page" style="display:none">
+  <div class="pg-head">
+    <div>
+      <div class="pg-title">Returned Memos</div>
+      <div class="pg-desc">Memos requiring revision</div>
+    </div>
+  </div>
+  <div class="table-card">
+    <div class="tc-top">
+      <span class="tc-title">Needs Revision</span>
+    </div>
+    <div id="mm-ret-rows"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- WORKFLOW GUIDE -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="view-guide" class="page" style="display:none">
+  <div class="pg-head">
+    <div>
+      <div class="pg-title">Workflow Guide</div>
+      <div class="pg-desc">How the NIF approval processes work</div>
+    </div>
+  </div>
+  <div class="guide-grid">
+    <div class="guide-card">
+      <div class="gc-icon gc-blue">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="gc-title">Maker / Employee</div>
+      <p class="gc-desc">The Maker drafts and submits requests for approval. They can create, edit drafts, and resubmit after revision. In Leave, they apply for leave and track their applications.</p>
+    </div>
+    <div class="guide-card">
+      <div class="gc-icon gc-yellow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      </div>
+      <div class="gc-title">Checker / Manager</div>
+      <p class="gc-desc">The Checker reviews submissions for accuracy, completeness, and compliance. They can approve, add conditions, or return for revision before forwarding to the Approver.</p>
+    </div>
+    <div class="guide-card">
+      <div class="gc-icon gc-red">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+      </div>
+      <div class="gc-title">Approver / Director</div>
+      <p class="gc-desc">The Approver makes final decisions on submissions. Upon approval, documents are considered officially cleared and filed in institutional records.</p>
+    </div>
+  </div>
+  <div class="guide-grid" style="margin-top:20px">
+    <div class="guide-card">
+      <div class="gc-title">Leave Management</div>
+      <p class="gc-desc">Submit leave applications with dates, type, and reason. Applications are reviewed by your manager and HR before final approval by the Director.</p>
+    </div>
+    <div class="guide-card">
+      <div class="gc-title">Memo Approval</div>
+      <p class="gc-desc">Draft internal memos with subject, background, and purpose. Go through a 3-level review: Maker → Checker → Approver for institutional approvals.</p>
+    </div>
+    <div class="guide-card">
+      <div class="gc-title">Tracking & History</div>
+      <p class="gc-desc">All submissions have complete audit trails. Track status, view history, and receive notifications as your requests move through the workflow.</p>
+    </div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- NEW MEMO MODAL -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="overlay" id="modal-new">
+<div class="modal">
+  <div class="m-head">
+    <div>
+      <div class="m-htitle">Draft New Internal Memo</div>
+      <div class="m-hsub">Complete all required fields <span class="req">*</span></div>
+    </div>
+    <button class="m-close" onclick="closeModal('modal-new')">✕</button>
+  </div>
+  <div class="m-body">
+    <div class="fsec">Document Header</div>
+    <div class="fgrid">
+      <div class="fg">
+        <label>From (Maker) <span class="req">*</span></label>
+        <input type="text" id="n-from" placeholder="Full name, designation">
+      </div>
+      <div class="fg">
+        <label>To (Recipient) <span class="req">*</span></label>
+        <input type="text" id="n-to" placeholder="Full name, designation">
+      </div>
+    </div>
+    <div class="fg">
+      <label>Subject <span class="req">*</span></label>
+      <input type="text" id="n-subject" placeholder="Clear, concise subject line">
+    </div>
+    <div class="fgrid">
+      <div class="fg">
+        <label>Department / Unit</label>
+        <select id="n-dept">
+          <option>Programs</option>
+          <option>Technical</option>
+          <option>Administration</option>
+          <option>Finance</option>
+          <option>Legal</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Priority</label>
+        <select id="n-priority">
+          <option>Normal</option>
+          <option>Urgent</option>
+          <option>Confidential</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="fsec">Memo Body</div>
+    <div class="fg">
+      <label>Background & Context</label>
+      <textarea id="n-bg" placeholder="Provide relevant background..."></textarea>
+    </div>
+    <div class="fg">
+      <label>Purpose / Objective <span class="req">*</span></label>
+      <textarea id="n-purpose" placeholder="State clearly what this memo is seeking..."></textarea>
+    </div>
+    <div class="fg">
+      <label>Details</label>
+      <textarea id="n-body" placeholder="Key facts, figures, or supporting information..." style="min-height:90px"></textarea>
+    </div>
+    <div class="fg">
+      <label>Action Required</label>
+      <textarea id="n-action" placeholder="What specific action is expected?"></textarea>
+    </div>
+
+    <div class="fsec">Routing</div>
+    <div class="fgrid">
+      <div class="fg">
+        <label>Assign Checker <span class="req">*</span></label>
+        <select id="n-checker">
+          <option value="">Select checker...</option>
+          <option value="Sita Koirala — Programme Manager">Sita Koirala — Programme Manager</option>
+          <option value="Rajesh Tamang — Finance Officer">Rajesh Tamang — Finance Officer</option>
+          <option value="Meena Thapa — Legal Advisor">Meena Thapa — Legal Advisor</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Assign Approver <span class="req">*</span></label>
+        <select id="n-approver">
+          <option value="">Select approver...</option>
+          <option value="Dr. Hari Prasad Shrestha — Executive Director">Dr. Hari Prasad Shrestha — Executive Director</option>
+          <option value="Sunita Rana — Deputy Director">Sunita Rana — Deputy Director</option>
+        </select>
+      </div>
+    </div>
+    <div class="fg">
+      <label>Internal Notes</label>
+      <textarea id="n-notes" placeholder="Any confidential notes for reviewers..." style="min-height:50px"></textarea>
+    </div>
+  </div>
+  <div class="m-foot">
+    <button class="btn btn-ghost" onclick="closeModal('modal-new')">Cancel</button>
+    <button class="btn btn-ghost" onclick="saveDraft()">Save as Draft</button>
+    <button class="btn btn-accent" onclick="submitMemo()">Submit for Review →</button>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- DETAIL MODAL -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="overlay" id="modal-detail">
+<div class="modal modal-lg">
+  <div class="m-head">
+    <div>
+      <div class="m-htitle" id="d-title">Detail View</div>
+      <div class="m-hsub" id="d-sub">Document Detail</div>
+    </div>
+    <button class="m-close" onclick="closeModal('modal-detail')">✕</button>
+  </div>
+  <div class="m-body" id="d-body"></div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- TOAST -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="toast-wrap">
+  <div class="toast" id="toast">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+    <span id="toast-msg">Done</span>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// CONFIGURATION
+// ═══════════════════════════════════════════════════════════
+const ROLES={
+  maker:  {name:'Ram Bahadur Khatri',title:'Programme Director',initials:'RB',color:'#10B981',label:'Maker'},
+  checker:{name:'Sita Koirala',title:'Programme Manager',initials:'SK',color:'#F59E0B',label:'Checker'},
+  approver:{name:'Dr. Hari Prasad Shrestha',title:'Executive Director',initials:'HP',color:'#DC143C',label:'Approver'}
+};
+
+let currentModule='leave';
+let currentView='lv-dashboard';
+let role='maker';
+let mmFilt='all';
+let mmSrch='';
+let lvFilt='all';
+
+// ═══════════════════════════════════════════════════════════
+// LEAVE DATA
+// ═══════════════════════════════════════════════════════════
+const LEAVES=[
+  {id:'LV-001',employee:'Ram Bahadur Khatri',type:'Annual Leave',start:'2081-01-15',end:'2081-01-17',days:3,reason:'Family function',status:'approved',manager:'Sita Koirala',applied:'2081-01-10',handover:'Project Alpha handover to Sita'},
+  {id:'LV-002',employee:'Ram Bahadur Khatri',type:'Sick Leave',start:'2081-02-01',end:'2081-02-02',days:2,reason:'Medical appointment',status:'approved',manager:'Sita Koirala',applied:'2081-01-28',handover:''},
+  {id:'LV-003',employee:'Ram Bahadur Khatri',type:'Casual Leave',start:'2081-02-20',end:'2081-02-20',days:1,reason:'Personal work',status:'approved',manager:'Sita Koirala',applied:'2081-02-15',handover:''},
+  {id:'LV-004',employee:'Ram Bahadur Khatri',type:'Annual Leave',start:'2081-03-10',end:'2081-03-12',days:3,reason:'Home visit',status:'pending',manager:'Sita Koirala',applied:'2081-03-05',handover:'Quarterly report pending'},
+  {id:'LV-005',employee:'Sita Koirala',type:'Annual Leave',start:'2081-03-12',end:'2081-03-13',days:2,reason:'Travel',status:'approved',manager:'Dr. Hari Prasad Shrestha',applied:'2081-03-01',handover:''},
+  {id:'LV-006',employee:'Rajesh Tamang',type:'Sick Leave',start:'2081-03-25',end:'2081-03-26',days:2,reason:'Medical rest',status:'pending',manager:'Dr. Hari Prasad Shrestha',applied:'2081-03-20',handover:'Salary processing delayed'},
+];
+
+// ═══════════════════════════════════════════════════════════
+// MEMO DATA
+// ═══════════════════════════════════════════════════════════
+const MEMOS=[
+  {id:'NIF/MEMO/2081/001',subject:'Approval for Open Source IXP Software Development — APNIC Collaboration',from:'Ram Bahadur Khatri, Programme Director',to:'Dr. Hari Prasad Shrestha, Executive Director',date:'2025-01-10',dept:'Programs',priority:'Normal',bg:'NIF has been in discussions with APNIC Foundation since Q3 2024 regarding a collaborative open-source project to develop IXP management software.',purpose:'To seek Executive Director approval for entering into a formal MoU with APNIC Foundation.',body:'APNIC contributes USD 80,000 and two senior engineers. All code released under Apache License 2.0.',action:'Please approve the proposed collaboration.',checker:'Sita Koirala — Programme Manager',approver:'Dr. Hari Prasad Shrestha — Executive Director',notes:'Critical for NIF 2025 open-source strategy.',status:'approved',timeline:[{t:'c',text:'Memo drafted',by:'Ram Bahadur Khatri (Maker)',date:'2025-01-08'},{t:'s',text:'Submitted for review',by:'Ram Bahadur Khatri (Maker)',date:'2025-01-10'},{t:'ch',text:'Reviewed and forwarded',by:'Sita Koirala (Checker)',date:'2025-01-12'},{t:'ok',text:'Approved',by:'Dr. Hari Prasad Shrestha (Approver)',date:'2025-01-14'}]},
+  {id:'NIF/MEMO/2081/002',subject:'Digital Transformation Roadmap FY 2081–82 — Budget Approval',from:'Ram Bahadur Khatri, Programme Director',to:'Dr. Hari Prasad Shrestha, Executive Director',date:'2025-01-22',dept:'Programs',priority:'Urgent',bg:'NIF has initiated a comprehensive digital transformation exercise.',purpose:'Budget approval of NPR 18,00,000 for technology infrastructure.',body:'Four pillars: Document digitalisation, Open data portal, Staff training, Website redesign.',action:'Review and approve roadmap.',checker:'Sita Koirala — Programme Manager',approver:'Dr. Hari Prasad Shrestha — Executive Director',notes:'Finance committee pre-reviewed.',status:'checking',timeline:[{t:'c',text:'Memo drafted',by:'Ram Bahadur Khatri (Maker)',date:'2025-01-20'},{t:'s',text:'Submitted',by:'Ram Bahadur Khatri (Maker)',date:'2025-01-22'}]},
+  {id:'NIF/MEMO/2081/003',subject:'Open Source Software Policy for NIF — Formal Adoption',from:'Ram Bahadur Khatri, Programme Director',to:'All Department Heads',date:'2025-02-03',dept:'Administration',priority:'Normal',bg:'Draft Open Source Policy prepared with ISOC Nepal.',purpose:'Seek endorsement for NIF Open Source Policy.',body:'Key provisions: FOSS preference in procurement, Apache/MIT licensing, upstream contributions.',action:'Department heads to review by Feb 14.',checker:'Sita Koirala — Programme Manager',approver:'Dr. Hari Prasad Shrestha — Executive Director',notes:'Peer-reviewed by ISOC Nepal.',status:'submitted',timeline:[{t:'c',text:'Drafted',by:'Ram Bahadur Khatri (Maker)',date:'2025-01-30'},{t:'s',text:'Submitted',by:'Ram Bahadur Khatri (Maker)',date:'2025-02-03'}]},
+  {id:'NIF/MEMO/2081/004',subject:'Revised Work-from-Home Policy',from:'Ram Bahadur Khatri, Programme Director',to:'All Technical Staff',date:'2025-02-20',dept:'Administration',priority:'Normal',bg:'Following staff satisfaction survey.',purpose:'Establish 2-day/week WFH entitlement.',body:'Eligible: permanent technical staff. Conditions: core hours, VPN, security policy.',action:'HR to update contracts.',checker:'Sita Koirala — Programme Manager',approver:'Dr. Hari Prasad Shrestha — Executive Director',notes:'Labour Act compliant.',status:'rejected',timeline:[{t:'c',text:'Drafted',by:'Ram Bahadur Khatri (Maker)',date:'2025-02-17'},{t:'s',text:'Submitted',by:'Ram Bahadur Khatri (Maker)',date:'2025-02-20'},{t:'ch',text:'Cleared',by:'Sita Koirala (Checker)',date:'2025-02-22'},{t:'r',text:'Returned',by:'Dr. Hari Prasad Shrestha (Approver)',date:'2025-02-24'}]},
+  {id:'NIF/MEMO/2081/005',subject:'Staff Training on Network Security — Q1 2081',from:'Ram Bahadur Khatri, Programme Director',to:'Dr. Hari Prasad Shrestha, Executive Director',date:'2025-03-01',dept:'Technical',priority:'Normal',bg:'No formal cybersecurity training since FY 2079.',purpose:'Approval for NPR 2,40,000 training programme.',body:'2-day workshop, 12 staff, Nepal Cyber Security Alliance.',action:'Approve and authorise Finance.',checker:'Sita Koirala — Programme Manager',approver:'Dr. Hari Prasad Shrestha — Executive Director',notes:'Two quotes obtained.',status:'draft',timeline:[{t:'c',text:'Drafted',by:'Ram Bahadur Khatri (Maker)',date:'2025-03-01'}]},
+  {id:'NIF/MEMO/2081/006',subject:'IPv6 Research Partnership — RIPE NCC',from:'Ram Bahadur Khatri, Programme Director',to:'Dr. Hari Prasad Shrestha, Executive Director',date:'2025-03-05',dept:'Technical',priority:'Normal',bg:'',purpose:'Joint research on IPv6 adoption.',body:'',action:'',checker:'Sita Koirala — Programme Manager',approver:'Dr. Hari Prasad Shrestha — Executive Director',notes:'Early draft.',status:'draft',timeline:[{t:'c',text:'Started',by:'Ram Bahadur Khatri (Maker)',date:'2025-03-05'}]}
+];
+
+// ═══════════════════════════════════════════════════════════
+// MODULE SWITCHING
+// ═══════════════════════════════════════════════════════════
+function switchModule(mod,el){
+  currentModule=mod;
+  document.querySelectorAll('.ms-btn').forEach(b=>b.classList.remove('on'));
+  if(el)el.classList.add('on');
+  document.getElementById('sidebar-leave').style.display=mod==='leave'?'':'none';
+  document.getElementById('sidebar-memo').style.display=mod==='memo'?'':'none';
+
+  if(mod==='leave')goTo('lv-dashboard',null);
+  else goTo('mm-dashboard',null);
+}
+
+// ═══════════════════════════════════════════════════════════
+// ROLE SWITCHING
+// ═══════════════════════════════════════════════════════════
+function switchRole(r,el){
+  role=r;
+  document.querySelectorAll('.rs-btn').forEach(b=>b.classList.remove('on'));
+  if(el)el.classList.add('on');
+  const u=ROLES[r];
+  document.getElementById('hd-av').textContent=u.initials;
+  document.getElementById('hd-av').style.background=u.color;
+  document.getElementById('hd-name').textContent=u.name;
+  document.getElementById('hd-role').textContent=u.title+' · '+u.label;
+  toast('Signed in as '+u.name);
+  refresh();
+}
+
+// ═══════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════
+function goTo(v,el){
+  currentView=v;
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p=>p.style.display='none');
+  // Show target
+  const target=document.getElementById('view-'+v);
+  if(target)target.style.display='';
+
+  // Update sidebar
+  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('on'));
+  if(el)el.classList.add('on');
+
+  // Refresh content
+  if(v.startsWith('lv-')){
+    if(v==='lv-dashboard')renderLvDashboard();
+    else if(v==='lv-my')renderLvMy();
+    else if(v==='lv-pending')renderLvPending();
+  }else if(v.startsWith('mm-')){
+    refreshMemoStats();
+    if(v==='mm-dashboard')renderMmDash();
+    else if(v==='mm-all')renderMmAll();
+    else if(v==='mm-drafts')renderMmFiltered('draft');
+    else if(v==='mm-submitted')renderMmFiltered('submitted');
+    else if(v==='mm-review')renderMmFiltered('checking');
+    else if(v==='mm-approved')renderMmFiltered('approved');
+    else if(v==='mm-returned')renderMmFiltered('rejected');
+  }
+}
+
+function showGuide(){
+  document.querySelectorAll('.page').forEach(p=>p.style.display='none');
+  document.getElementById('view-guide').style.display='';
+  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('on'));
+}
+
+// ═══════════════════════════════════════════════════════════
+// LEAVE FUNCTIONS
+// ═══════════════════════════════════════════════════════════
+function lvSetFilter(s,el){
+  lvFilt=s;
+  if(el){document.querySelectorAll('.ftag').forEach(b=>b.classList.remove('on'));el.classList.add('on');}
+  renderLvMy();
+}
+
+function submitLeave(){
+  const type=document.getElementById('lv-type').value;
+  const start=document.getElementById('lv-start').value;
+  const end=document.getElementById('lv-end').value;
+  const reason=document.getElementById('lv-reason').value.trim();
+
+  if(!start||!end||!reason){toast('Please fill all required fields',true);return;}
+
+  const days=(new Date(end)-new Date(start))/(1000*60*60*24)+1;
+  const id='LV-'+String(LEAVES.length+1).padStart(3,'0');
+
+  LEAVES.unshift({
+    id,employee:'Ram Bahadur Khatri',type,start,end,days,
+    reason,status:'pending',manager:document.getElementById('lv-manager').value,
+    applied:new Date().toISOString().slice(0,10),
+    handover:document.getElementById('lv-handover').value
+  });
+
+  toast('Leave application submitted');
+  goTo('lv-dashboard',null);
+}
+
+function renderLvDashboard(){
+  const pending=LEAVES.filter(l=>l.status==='pending').length;
+  const approved=LEAVES.filter(l=>l.status==='approved').length;
+  const rejected=LEAVES.filter(l=>l.status==='rejected').length;
+
+  document.getElementById('lv-st-total').textContent=LEAVES.length;
+  document.getElementById('lv-st-pending').textContent=pending;
+  document.getElementById('lv-st-approved').textContent=approved;
+  document.getElementById('lv-st-rejected').textContent=rejected;
+
+  const sbPending=document.getElementById('sbn-pending');
+  sbPending.textContent=pending;
+  sbPending.style.display=pending>0?'':'none';
+
+  document.getElementById('lv-recent-table').innerHTML=buildLvTable(LEAVES.slice(0,5));
+}
+
+function renderLvMy(){
+  let list=LEAVES.filter(l=>l.employee==='Ram Bahadur Khatri');
+  if(lvFilt!=='all')list=list.filter(l=>l.status===lvFilt);
+  document.getElementById('lv-my-table').innerHTML=buildLvTable(list);
+  document.getElementById('sbc-my').textContent=list.length;
+}
+
+function renderLvPending(){
+  let list=LEAVES.filter(l=>l.status==='pending');
+  document.getElementById('lv-pending-list').innerHTML=list.length?list.map(l=>`
+    <div class="leave-card">
+      <div class="lc-av">${l.employee.split(' ').map(n=>n[0]).join('').slice(0,2)}</div>
+      <div class="lc-info">
+        <div class="lc-name">${l.employee}</div>
+        <div class="lc-type">${l.type} · ${l.days} day(s)</div>
+        <div class="lc-dates">${l.start} to ${l.end}</div>
+        <div style="margin-top:6px;font-size:12px;color:var(--text-secondary)">${l.reason}</div>
+      </div>
+      <div class="lc-status">
+        <span class="chip ch-pending">Pending</span>
+        <div style="display:flex;gap:6px;margin-top:10px">
+          <button class="btn btn-success btn-xs" onclick="lvAction('${l.id}','approved')">Approve</button>
+          <button class="btn btn-accent btn-xs" onclick="lvAction('${l.id}','rejected')">Reject</button>
+        </div>
+      </div>
+    </div>
+  `).join(''):'<div class="empty-state"><div class="empty-icon">✓</div><div class="empty-msg">No pending applications</div></div>';
+}
+
+function lvAction(id,action){
+  const lv=LEAVES.find(l=>l.id===id);
+  if(lv){lv.status=action;toast('Leave '+action);refresh();}
+}
+
+function buildLvTable(list){
+  if(!list.length)return'<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-msg">No applications found</div></div>';
+  return`<table><colgroup><col style="width:80px"><col style="width:120px"><col><col style="width:90px"><col style="width:100px"></colgroup>
+  <thead><tr><th>ID</th><th>Type</th><th>Dates</th><th>Days</th><th>Status</th></tr></thead>
+  <tbody>${list.map(l=>`<tr class="mrow">
+    <td><span class="ref-no">${l.id}</span></td>
+    <td>${l.type}</td>
+    <td>${l.start} to ${l.end}</td>
+    <td>${l.days}</td>
+    <td>${lvChip(l.status)}</td>
+  </tr>`).join('')}</tbody></table>`;
+}
+
+function lvChip(s){
+  const m={pending:['ch-pending','Pending'],approved:['ch-approved-lv','Approved'],rejected:['ch-rejected','Rejected']};
+  const[c,l]=m[s]||['ch-draft',s];
+  return`<span class="chip ${c}">${l}</span>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// MEMO FUNCTIONS
+// ═══════════════════════════════════════════════════════════
+function mmChip(s){
+  const m={draft:['ch-draft','Draft'],submitted:['ch-submitted','Submitted'],checking:['ch-checking','Checking'],approved:['ch-approved','Approved'],rejected:['ch-rejected','Returned']};
+  const[c,l]=m[s]||['ch-draft',s];
+  return`<span class="chip ${c}">${l}</span>`;
+}
+
+function mmSetFilter(s,el){
+  mmFilt=s;
+  if(el){document.querySelectorAll('.ftag').forEach(b=>b.classList.remove('on'));el.classList.add('on');}
+  renderMmAll();
+}
+
+function mmOnSearch(v){mmSrch=v;renderMmAll();}
+
+function refresh(){
+  if(currentModule==='leave')renderLvDashboard();
+  else refreshMemoStats();
+}
+
+function refreshMemoStats(){
+  const c={all:MEMOS.length,draft:0,pend:0,ok:0,ret:0,sub:0,chk:0};
+  MEMOS.forEach(m=>{
+    if(m.status==='draft')c.draft++;
+    if(m.status==='submitted'){c.pend++;c.sub++;}
+    if(m.status==='checking'){c.pend++;c.chk++;}
+    if(m.status==='approved')c.ok++;
+    if(m.status==='rejected')c.ret++;
+  });
+  document.getElementById('mm-st-all').textContent=c.all;
+  document.getElementById('mm-st-draft').textContent=c.draft;
+  document.getElementById('mm-st-pend').textContent=c.pend;
+  document.getElementById('mm-st-ok').textContent=c.ok;
+  document.getElementById('mm-st-ret').textContent=c.ret;
+
+  document.getElementById('sbc-all-memo').textContent=c.all;
+  document.getElementById('sbc-draft-memo').textContent=c.draft;
+  document.getElementById('sbc-ok-memo').textContent=c.ok;
+  document.getElementById('sbc-ret-memo').textContent=c.ret;
+
+  const sbn=document.getElementById('sbn-sub-memo');
+  sbn.textContent=c.sub;sbn.style.display=c.sub>0?'':'none';
+  const snc=document.getElementById('sbn-chk-memo');
+  snc.textContent=c.chk;snc.style.display=c.chk>0?'':'none';
+}
+
+function buildMemoTable(list,limit){
+  const rows=limit?list.slice(0,limit):list;
+  if(!rows.length)return'<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-msg">No memos found</div></div>';
+  return`<table><colgroup><col style="width:120px"><col><col style="width:110px"><col style="width:70px"><col style="width:100px"><col style="width:80px"></colgroup>
+  <thead><tr><th>Reference</th><th>Subject</th><th>From</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+  <tbody>${rows.map(m=>`<tr class="mrow" onclick="openDetail('${m.id}')">
+    <td><span class="ref-no">${m.id.replace('NIF/MEMO/','').replace('/','-')}</span></td>
+    <td><div class="memo-subj">${m.subject}</div><div class="memo-from">To: ${m.to.split(',')[0]}</div></td>
+    <td style="font-size:12px;color:var(--text-secondary)">${m.from.split(',')[0]}</td>
+    <td style="font-size:11px;color:var(--text-muted)">${m.date}</td>
+    <td>${mmChip(m.status)}</td>
+    <td><div class="act-row"><div class="act-btn" title="View" onclick="openDetail('${m.id}')"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div></div></td>
+  </tr>`).join('')}</tbody></table>`;
+}
+
+function renderMmDash(){
+  refreshMemoStats();
+  document.getElementById('mm-dash-rows').innerHTML=buildMemoTable(MEMOS,5);
+}
+
+function renderMmAll(){
+  let list=MEMOS.filter(m=>{
+    if(mmFilt!=='all'&&m.status!==mmFilt)return false;
+    if(mmSrch){const q=mmSrch.toLowerCase();return m.subject.toLowerCase().includes(q)||m.id.toLowerCase().includes(q);}
+    return true;
+  });
+  document.getElementById('mm-rows').innerHTML=buildMemoTable(list);
+}
+
+function renderMmFiltered(status){
+  const elId='mm-'+status.replace('submitted','sub').replace('checking','chk').replace('approved','ok').replace('rejected','ret')+'-rows';
+  const el=document.getElementById(elId);
+  if(el)el.innerHTML=buildMemoTable(MEMOS.filter(m=>m.status===status));
+}
+
+function openDetail(id){
+  const m=MEMOS.find(x=>x.id===id);if(!m)return;
+  document.getElementById('d-title').textContent=m.subject;
+  document.getElementById('d-sub').innerHTML=`<span class="ref-no">${m.id}</span> · ${mmChip(m.status)} · ${m.priority}`;
+
+  const tiMap={c:'ti-c',s:'ti-s',ch:'ti-ch',ok:'ti-ok',r:'ti-r'};
+  const txtMap={c:'📝',s:'↑',ch:'◎',ok:'✓',r:'↩'};
+  const tlHtml=m.timeline.map(t=>`<div class="tl-item">
+    <div class="tl-ico ${tiMap[t.t]||'ti-c'}">${txtMap[t.t]||'•'}</div>
+    <div class="tl-body"><div class="tl-act">${t.text}</div><div class="tl-meta">${t.by} · ${t.date}</div></div>
+  </div>`).join('');
+
+  const stages=[{label:'Draft created',who:'Maker'},{label:'Submitted',who:'Maker'},{label:'Checker review',who:'Checker'},{label:'Director approval',who:'Approver'}];
+  const si=['draft','submitted','checking','approved'].indexOf(m.status);
+  const psHtml=stages.map((s,i)=>{
+    let cls='ps-wait';
+    if(m.status==='rejected'&&i===3)cls='ps-wait';
+    else if(m.status==='rejected'&&i===2)cls='ps-cur';
+    else if(i<si||i===si)cls='ps-done';
+    else if(i===si+1)cls='ps-cur';
+    return`<div class="ps-item ${cls}"><div class="ps-dot"></div><div class="ps-label">${s.label}</div><div class="ps-who">${s.who}</div></div>`;
+  }).join('');
+
+  const sigDone=(s)=>s==='approved';
+  const checkSigned=(s)=>s==='checking'||s==='approved';
+
+  let actionPanel='';
+  const isMaker=m.from.startsWith(ROLES.maker.name);
+  const canSubmit=role==='maker'&&isMaker&&m.status==='draft';
+  const canCheck=role==='checker'&&m.status==='submitted';
+  const canApprove=role==='approver'&&m.status==='checking';
+
+  if(canSubmit){
+    actionPanel=`<div class="action-panel">
+      <div class="ap-hd">Maker — Submit for Checker Review</div>
+      <textarea class="ap-ta" id="ap-${id}" placeholder="Add note for checker (optional)..."></textarea>
+      <div class="ap-btns"><button class="btn btn-primary btn-sm" onclick="doAction('${id}','submit')">Submit to Checker →</button></div>
+    </div>`;
+  }else if(canCheck){
+    actionPanel=`<div class="action-panel">
+      <div class="ap-hd">Checker — Review and Forward</div>
+      <textarea class="ap-ta" id="ap-${id}" placeholder="Add review comments..."></textarea>
+      <div class="ap-btns">
+        <button class="btn btn-success btn-sm" onclick="doAction('${id}','check')">✓ Forward to Approver</button>
+        <button class="btn btn-ghost btn-sm" onclick="doAction('${id}','return_maker')">↩ Return to Maker</button>
+      </div>
+    </div>`;
+  }else if(canApprove){
+    actionPanel=`<div class="action-panel">
+      <div class="ap-hd">Approver — Final Decision</div>
+      <textarea class="ap-ta" id="ap-${id}" placeholder="Enter approval note or reasons for return..."></textarea>
+      <div class="ap-btns">
+        <button class="btn btn-success btn-sm" onclick="doAction('${id}','approve')">✓ Approve</button>
+        <button class="btn btn-accent btn-sm" onclick="doAction('${id}','reject')">↩ Return for Revision</button>
+      </div>
+    </div>`;
+  }
+
+  document.getElementById('d-body').innerHTML=`<div class="detail-wrap">
+    <div>
+      <div class="memo-paper mp-${m.status}">
+        <div class="mp-masthead">
+          <div><div class="mp-org">Nepal Internet Foundation</div><div class="mp-org-sub">Kathmandu, Nepal · nif.org.np</div></div>
+          <div class="mp-doc-label">Internal Memo</div>
+        </div>
+        <dl class="mp-fields">
+          <dt>Ref No.:</dt><dd><span class="ref-no">${m.id}</span></dd>
+          <dt>Date:</dt><dd>${m.date}</dd>
+          <dt>From:</dt><dd>${m.from}</dd>
+          <dt>To:</dt><dd>${m.to}</dd>
+          <dt>Dept.:</dt><dd>${m.dept}</dd>
+          <dt>Priority:</dt><dd>${m.priority}</dd>
+        </dl>
+        <div class="mp-subject-line">Re: ${m.subject}</div>
+        ${m.bg?`<div class="mp-section-title">Background</div><div class="mp-text">${m.bg}</div>`:''}
+        ${m.purpose?`<div class="mp-section-title">Purpose / Objective</div><div class="mp-text">${m.purpose}</div>`:''}
+        ${m.body?`<div class="mp-section-title">Details</div><div class="mp-text">${m.body}</div>`:''}
+        ${m.action?`<div class="mp-section-title">Action Required</div><div class="mp-text">${m.action}</div>`:''}
+        <div class="mp-sig-row">
+          <div class="sig-col"><div class="sig-line ${m.status!=='draft'?'signed':''}"></div><div class="sig-name">${m.from.split(',')[0]}</div><div class="sig-role">Maker</div></div>
+          <div class="sig-col"><div class="sig-line ${checkSigned(m.status)?'signed':''}"></div><div class="sig-name">${(m.checker||'—').split('—')[0].trim()}</div><div class="sig-role">Checker</div></div>
+          <div class="sig-col"><div class="sig-line ${sigDone(m.status)?'signed':''}"></div><div class="sig-name">${(m.approver||'—').split('—')[0].trim()}</div><div class="sig-role">Approver</div></div>
+        </div>
+      </div>
+      <div class="content-block">
+        <div class="cb-title">Audit Trail & History</div>
+        <div class="tl">${tlHtml}</div>
+      </div>
+      ${actionPanel}
+    </div>
+    <div class="side-panel">
+      <div class="side-card"><div class="sc-hd">Workflow Progress</div><div class="progress-steps">${psHtml}</div></div>
+      <div class="side-card">
+        <div class="sc-hd">Assigned Team</div>
+        <div class="person-row"><div class="p-av av-m">RB</div><div><div class="p-name">${m.from.split(',')[0]}</div><div class="p-title"><span class="rpill rp-m">Maker</span></div></div></div>
+        <div class="person-row"><div class="p-av av-c">SK</div><div><div class="p-name">${(m.checker||'Not assigned').split('—')[0].trim()}</div><div class="p-title"><span class="rpill rp-c">Checker</span></div></div></div>
+        <div class="person-row"><div class="p-av av-a">HP</div><div><div class="p-name">${(m.approver||'Not assigned').split('—')[0].trim()}</div><div class="p-title"><span class="rpill rp-a">Approver</span></div></div></div>
+      </div>
+      <div class="side-card">
+        <div class="sc-hd">Document Info</div>
+        <div class="meta-rows">
+          <div class="meta-row"><label>Reference</label><span class="ref-no" style="font-size:11px">${m.id}</span></div>
+          <div class="meta-row"><label>Department</label><span>${m.dept}</span></div>
+          <div class="meta-row"><label>Priority</label><span>${m.priority}</span></div>
+          <div class="meta-row"><label>Date</label><span>${m.date}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  openModal('modal-detail');
+}
+
+function doAction(id,action){
+  const m=MEMOS.find(x=>x.id===id);if(!m)return;
+  const note=document.getElementById('ap-'+id)?.value.trim()||'';
+  const today=new Date().toISOString().slice(0,10);
+  const u=ROLES[role];
+  if(action==='submit'){m.status='submitted';m.timeline.push({t:'s',text:'Submitted for review',by:u.name+' (Maker)',date:today});toast('Memo submitted');}
+  else if(action==='check'){m.status='checking';m.timeline.push({t:'ch',text:'Reviewed and forwarded',by:u.name+' (Checker)',date:today});toast('Forwarded to Approver');}
+  else if(action==='return_maker'){m.status='draft';m.timeline.push({t:'r',text:'Returned for revision',by:u.name+' (Checker)',date:today});toast('Returned to Maker',true);}
+  else if(action==='approve'){m.status='approved';m.timeline.push({t:'ok',text:'Approved',by:u.name+' (Approver)',date:today});toast('Memo approved');}
+  else if(action==='reject'){m.status='rejected';m.timeline.push({t:'r',text:'Returned for revision',by:u.name+' (Approver)',date:today});toast('Returned for revision',true);}
+  closeModal('modal-detail');
+  refresh();
+}
+
+function openNewMemo(){
+  document.getElementById('n-from').value=ROLES[role].name+', '+ROLES[role].title;
+  openModal('modal-new');
+}
+
+function saveDraft(){
+  const sub=document.getElementById('n-subject').value.trim();
+  const frm=document.getElementById('n-from').value.trim();
+  const to=document.getElementById('n-to').value.trim();
+  if(!sub||!frm||!to){toast('Subject, From and To are required',true);return;}
+  const num=String(MEMOS.length+1).padStart(3,'0');
+  const id=`NIF/MEMO/2081/${num}`;
+  MEMOS.unshift({
+    id,status:'draft',subject:sub,from:frm,to:to,
+    date:new Date().toISOString().slice(0,10),
+    dept:document.getElementById('n-dept').value,
+    priority:document.getElementById('n-priority').value,
+    bg:document.getElementById('n-bg').value,
+    purpose:document.getElementById('n-purpose').value,
+    body:document.getElementById('n-body').value,
+    action:document.getElementById('n-action').value,
+    checker:document.getElementById('n-checker').value,
+    approver:document.getElementById('n-approver').value,
+    notes:document.getElementById('n-notes').value,
+    timeline:[{t:'c',text:'Draft created',by:ROLES[role].name+' (Maker)',date:new Date().toISOString().slice(0,10)}]
+  });
+  closeModal('modal-new');
+  refresh();
+  toast('Draft saved');
+}
+
+function submitMemo(){
+  const sub=document.getElementById('n-subject').value.trim();
+  const frm=document.getElementById('n-from').value.trim();
+  const to=document.getElementById('n-to').value.trim();
+  const pur=document.getElementById('n-purpose').value.trim();
+  const chk=document.getElementById('n-checker').value;
+  const apr=document.getElementById('n-approver').value;
+  if(!sub||!frm||!to||!pur){toast('Please complete required fields',true);return;}
+  if(!chk||!apr){toast('Assign a Checker and Approver',true);return;}
+  saveDraft();
+  MEMOS[0].status='submitted';
+  MEMOS[0].timeline.push({t:'s',text:'Submitted for review',by:ROLES[role].name+' (Maker)',date:new Date().toISOString().slice(0,10)});
+  refresh();
+  toast('Memo submitted for review');
+}
+
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+
+let _toastTimer;
+function toast(msg,err){
+  const el=document.getElementById('toast');
+  document.getElementById('toast-msg').textContent=msg;
+  el.className='toast'+(err?' err':'');
+  void el.offsetWidth;
+  el.classList.add('show');
+  clearTimeout(_toastTimer);
+  _toastTimer=setTimeout(()=>el.classList.remove('show'),3200);
+}
+
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')}));
+
+// Initialize
+document.getElementById('lv-start').value=new Date().toISOString().slice(0,10);
+document.getElementById('lv-end').value=new Date().toISOString().slice(0,10);
+renderLvDashboard();
+</script>
+</body>
+</html>
